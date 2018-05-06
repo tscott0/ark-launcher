@@ -1,6 +1,8 @@
 package com.scott.tom.arklauncher.ark
 
 import android.content.pm.PackageManager
+import android.graphics.drawable.Drawable
+import android.os.Build
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.GridLayoutManager
@@ -32,20 +34,22 @@ class PageFragment : Fragment() {
             val packageInfo = pm.getInstalledPackages(PackageManager.PERMISSION_GRANTED)
             val packages = packageInfo.filter {
                 pm.getLaunchIntentForPackage(it.packageName) != null
+            }.filter {
+                pm.getApplicationIcon(it.packageName) != null
             }.mapNotNull {
-                //                val drawable = getActivityIcon(pm, it.packageName, "com.google.android.apps.chrome.Main")
-                val drawable = pm.getApplicationIcon(it.packageName)
-                val onClick = {
-                    val launchIntent = pm.getLaunchIntentForPackage(it.packageName)
-                    if (launchIntent != null) startActivity(launchIntent)
+                    //                val drawable = getActivityIcon(pm, it.packageName, "com.google.android.apps.chrome.Main")
+                    val drawable = pm.getApplicationIcon(it.packageName)
+                    val onClick = {
+                        val launchIntent = pm.getLaunchIntentForPackage(it.packageName)
+                        if (launchIntent != null) startActivity(launchIntent)
+                    }
+                    val appLabel = pm.getApplicationLabel(it.applicationInfo).toString()
+
+                    Triple(appLabel, drawable, onClick)
                 }
-                val appLabel = pm.getApplicationLabel(it.applicationInfo).toString()
 
-                Triple(appLabel, drawable, onClick)
+                viewAdapter = PageIconAdapter(packages)
             }
-
-            viewAdapter = PageIconAdapter(packages)
-        }
 
         recyclerView = rootView.findViewById<RecyclerView>(R.id.page_recycler_view).apply {
             // use this setting to improve performance if you know that changes
