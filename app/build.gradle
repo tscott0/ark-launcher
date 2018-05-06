@@ -27,4 +27,5 @@ android {
 dependencies {
     implementation project(':ark')
     implementation project(':base')
+    implementation 'com.android.support:recyclerview-v7:27.1.1'
 }
