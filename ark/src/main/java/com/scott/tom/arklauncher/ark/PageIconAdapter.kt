@@ -1,7 +1,6 @@
 package com.scott.tom.arklauncher.ark
 
 import android.graphics.drawable.Drawable
-import android.media.Image
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -10,7 +9,7 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 
-class PageIconAdapter(private val myDataset: List<Triple<String, Drawable, () -> Unit>>)  :
+class PageIconAdapter(private val myDataset: List<Triple<String, Drawable, () -> Unit>>) :
         RecyclerView.Adapter<PageIconAdapter.IconViewHolder>() {
 
     // A custom ViewHolder that contains a reference to both the icon and the title
