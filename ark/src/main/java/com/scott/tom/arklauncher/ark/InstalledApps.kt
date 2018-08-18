@@ -4,16 +4,29 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
+import android.os.AsyncTask
 import android.provider.Settings
-import android.support.v7.widget.RecyclerView
 
-object InstalledApps {
+object InstalledApps: AsyncTask<Context, Int, List<AppDetails>>() {
 
-    private lateinit var appList: List<AppDetails>
-    private lateinit var viewManager: RecyclerView.LayoutManager
+    private var appList: List<AppDetails> = listOf()
+    var onPostExecuteCallback: (Int, Double) -> Unit = { _: Int, _: Double -> }
+    var onAppAdded: (Int) -> Unit = {}
 
-    fun initFromContext(context: Context) {
-        val pm = context?.packageManager
+    var startTime: Long = 0
+    var endTime: Long = 0
+
+    var appCount = 0
+
+    override fun doInBackground(vararg params: Context): List<AppDetails> {
+        startTime = System.nanoTime()
+
+        if (appList.isNotEmpty()) {
+            return appList
+        }
+
+        val context = params[0]
+        val pm = context.packageManager
 
         if (pm != null) {
             val packageInfo = pm.getInstalledPackages(PackageManager.PERMISSION_GRANTED)
@@ -39,19 +52,24 @@ object InstalledApps {
                 val appLabel = pm.getApplicationLabel(it.applicationInfo).toString()
                 val drawable = pm.getApplicationIcon(it.packageName)
 
+                appCount++
+
+                onAppAdded(appCount)
+
                 AppDetails(appLabel, drawable, onClick, onLongClick)
             }
         }
-    }
 
-    fun list(context: Context): List<AppDetails> {
-        if (appList == null) {
-            initFromContext(context)
-        }
         return appList
     }
 
+    override fun onPostExecute(result: List<AppDetails>?) {
+        super.onPostExecute(result)
 
-    // Return List<AppDetails>
+        endTime = System.nanoTime()
+        val seconds = endTime.minus(startTime) / 1_000_000_000.0
 
+        onPostExecuteCallback(appCount, seconds)
+    }
 }
+

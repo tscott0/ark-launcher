@@ -1,33 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="70dp"
-    android:layout_height="90dp"
-    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="4dp"
     android:gravity="center_vertical"
-    >
+    android:orientation="vertical"
+    tools:layout_width="80dp">
 
-    <ImageView
+    <com.scott.tom.arklauncher.ark.SquareImageView
         android:id="@+id/icon_app_button"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
         android:layout_gravity="center"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp"
-        tools:src="@drawable/ic_launcher_foreground"
-        />
+        android:layout_marginBottom="4dp"
+        tools:layout_height="72dp"
+        tools:src="@drawable/ic_launcher_foreground" />
 
     <TextView
         android:id="@+id/icon_app_name"
         android:layout_width="match_parent"
-        android:layout_height="30dp"
+        android:layout_height="32dp"
+        android:ellipsize="end"
+        android:gravity="top"
+        android:maxLines="2"
+        android:textAlignment="center"
         android:textColor="@color/white"
         android:textSize="12sp"
-        android:textAlignment="center"
-        android:gravity="top"
-        android:ellipsize="end"
-        android:maxLines="2"
-        tools:text="Application Name is loooong"/>
+        tools:text="Application Name is loooong" />
 
 </LinearLayout>

@@ -26,6 +26,15 @@
             android:layout_above="@id/page_buttons_container"
             android:layout_marginBottom="10dp"></GridLayout>
 
+        <TextView
+            android:id="@+id/debug"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/page_buttons_container"
+            android:background="@color/colorPrimaryDark"
+            android:textColor="@color/white"
+            tools:text="Progress: 123" />
+
         <LinearLayout
             android:id="@+id/page_buttons_container"
             android:layout_width="match_parent"
