@@ -1,24 +1,21 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 27
+    compileSdkVersion 28
     
 
 
     defaultConfig {
         applicationId "com.scott.tom.arklauncher.app"
         minSdkVersion 21
-        targetSdkVersion 27
+        targetSdkVersion 28
         versionCode 1
         versionName "1.0"
-
-
     }
 
     buildTypes {
        release {
            minifyEnabled false
-           proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
        }
     }
 
@@ -27,5 +24,4 @@ android {
 dependencies {
     implementation project(':ark')
     implementation project(':base')
-    implementation 'com.android.support:recyclerview-v7:27.1.1'
 }

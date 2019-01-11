@@ -6,7 +6,8 @@
     android:padding="4dp"
     android:gravity="center_vertical"
     android:orientation="vertical"
-    tools:layout_width="80dp">
+    tools:layout_width="80dp"
+    tools:background="@color/grey">
 
     <com.scott.tom.arklauncher.ark.SquareImageView
         android:id="@+id/icon_app_button"

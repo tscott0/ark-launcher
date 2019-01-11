@@ -10,8 +10,6 @@ import android.provider.Settings
 object InstalledApps: AsyncTask<Context, Int, List<AppDetails>>() {
 
     private var appList: List<AppDetails> = listOf()
-    var onPostExecuteCallback: (Int, Double) -> Unit = { _: Int, _: Double -> }
-    var onAppAdded: (Int) -> Unit = {}
 
     var startTime: Long = 0
     var endTime: Long = 0
@@ -54,8 +52,6 @@ object InstalledApps: AsyncTask<Context, Int, List<AppDetails>>() {
 
                 appCount++
 
-                onAppAdded(appCount)
-
                 AppDetails(appLabel, drawable, onClick, onLongClick)
             }
         }
@@ -67,9 +63,7 @@ object InstalledApps: AsyncTask<Context, Int, List<AppDetails>>() {
         super.onPostExecute(result)
 
         endTime = System.nanoTime()
-        val seconds = endTime.minus(startTime) / 1_000_000_000.0
-
-        onPostExecuteCallback(appCount, seconds)
+//        val seconds = endTime.minus(startTime) / 1_000_000_000.0
     }
 }
 
